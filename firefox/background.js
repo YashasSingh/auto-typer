@@ -1,12 +1,16 @@
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  const { text, speed } = message;
-
-  // Wait for 5 seconds, then send the message to the content script
-  setTimeout(() => {
+chrome.commands.onCommand.addListener((command) => {
+  if (command === "startTyping") {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      if (tabs.length > 0) {
-        chrome.tabs.sendMessage(tabs[0].id, { text, speed });
-      }
+      chrome.scripting.executeScript({
+        target: { tabId: tabs[0].id },
+        files: ["content.js"]
+      }, () => {
+        chrome.tabs.sendMessage(tabs[0].id, { action: "startTyping" });
+      });
     });
-  }, 5000); // 5-second delay
+  } else if (command === "stopTyping") {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      chrome.tabs.sendMessage(tabs[0].id, { action: "stopTyping" });
+    });
+  }
 });
