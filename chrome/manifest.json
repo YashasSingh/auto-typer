@@ -1,14 +1,18 @@
 {
   "manifest_version": 3,
   "name": "Google Docs Auto Typer",
-  "version": "1.0",
-  "permissions": ["scripting", "activeTab"],
+  "version": "1.1",
+  "permissions": ["clipboardRead", "scripting", "activeTab"],
   "host_permissions": ["https://docs.google.com/*"],
-  "action": {
-    "default_popup": "popup.html",
-    "default_icon": "icon.png"
-  },
   "background": {
     "service_worker": "background.js"
+  },
+  "commands": {
+    "startTyping": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y"
+      },
+      "description": "Start typing clipboard content"
+    }
   }
 }
