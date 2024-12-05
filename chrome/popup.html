@@ -1,11 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Auto Typer</title>
+  <title>Auto Typer Settings</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 10px;
+    }
+    label, p {
+      margin: 5px 0;
+    }
+    input[type="range"] {
+      width: 100%;
+    }
+    #speed {
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-  <textarea id="textToType" placeholder="Enter text to type"></textarea>
-  <button id="startTyping">Start Typing</button>
+  <h2>Auto Typer Settings</h2>
+  <label for="speedRange">Typing Speed (ms per character):</label>
+  <input type="range" id="speedRange" min="50" max="500" value="150">
+  <p>Speed: <span id="speed">150</span> ms</p>
+  <p>Estimated Time: <span id="estimate">N/A</span> seconds</p>
+  <button id="saveSettings">Save Settings</button>
   <script src="popup.js"></script>
 </body>
 </html>
